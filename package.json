@@ -1,7 +1,7 @@
 {
-  "name": "crucix",
+  "name": "Geonix",
   "version": "2.0.0",
-  "description": "Local intelligence engine - 27 OSINT sources, live dashboard, public demo at crucix.live, auto-refresh, optional LLM layer.",
+  "description": "Local intelligence engine - 27 OSINT sources, live dashboard, public demo at Geonix.live, auto-refresh, optional LLM layer.",
   "type": "module",
   "scripts": {
     "start": "node server.mjs",
@@ -20,17 +20,21 @@
     "dashboard",
     "geopolitical"
   ],
-  "author": "Crucix",
+  "author": "Geonix",
   "license": "AGPL-3.0-only",
   "engines": {
     "node": ">=22",
     "npm": ">=10"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "gh": "^2.8.9",
+    "mapbox-gl": "^3.22.0"
   },
   "optionalDependencies": {
-    "discord.js": "^14.25.1"  },
+    "discord.js": "^14.25.1"
+  },
   "overrides": {
-    "undici": "^7.24.4"  }
+    "undici": "^7.24.4"
+  }
 }

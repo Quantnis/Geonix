@@ -1,5 +1,5 @@
 services:
-  crucix:
+  Geonix:
     build: .
     ports:
       - "${PORT:-3117}:${PORT:-3117}"

@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const filePath = '/home/yerbol/Documents/geonix/Crucix/dashboard/public/jarvis.html';
+const filePath = '/home/yerbol/Documents/geonix/Geonix/dashboard/public/jarvis.html';
 let content = fs.readFileSync(filePath, 'utf-8');
 
 // Global replaces
@@ -21,8 +21,8 @@ const replaces = [
   [/\bkinetic\b/gi, match => match === match.toUpperCase() ? "ACTIVE" : (match[0] === match[0].toUpperCase() ? "Active" : "active")],
   [/\bSIGINT\b/g, "NOAA"],
   [/\bHUMINT\b/g, "FIRMS"],
-  [/CRUCIX MONITOR/g, "GEONIX"],
-  [/CRUCIX/g, "GEONIX"],
+  [/Geonix MONITOR/g, "GEONIX"],
+  [/Geonix/g, "GEONIX"],
   [/WARTIME STAGFLATION RISK/g, "DISASTER INTELLIGENCE PLATFORM"],
   [/SWEEP 30\.1s/g, "REFRESH 30s"],
   [/SOURCES 28\/29/g, "FEEDS 6/7"],
@@ -93,7 +93,7 @@ content = content.replace(/GEONIX — Prediction Data Terminal/gi, "GEONIX — G
 const titleRegex = /<title>GEONIX — Prediction Data Terminal<\/title>/;
 content = content.replace(titleRegex, "<title>GEONIX — Geospatial Disaster Intelligence</title>\n<meta name=\"description\" content=\"AI-powered disaster prediction platform for floods and wildfires\" />");
 
-const titleRegex2 = /<title>CRUCIX — Intelligence Terminal<\/title>/;
+const titleRegex2 = /<title>Geonix — Intelligence Terminal<\/title>/;
 content = content.replace(titleRegex2, "<title>GEONIX — Geospatial Disaster Intelligence</title>\n<meta name=\"description\" content=\"AI-powered disaster prediction platform for floods and wildfires\" />");
 
 
