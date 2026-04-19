@@ -397,7 +397,7 @@ async function runSweepCycle() {
 async function start() {
   const port = config.port;
 
-  const server = app.listen(port);
+  const server = app.listen(port, '0.0.0.0');
 
   server.on('error', (err) => {
     if (err.code === 'EADDRINUSE') {
