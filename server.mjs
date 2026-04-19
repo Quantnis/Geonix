@@ -43,9 +43,9 @@ const llmProvider = createLLMProvider(config.llm);
 const telegramAlerter = new TelegramAlerter(config.telegram);
 const discordAlerter = new DiscordAlerter(config.discord || {});
 
-if (llmProvider) console.log(`[Crucix] LLM enabled: ${llmProvider.name} (${llmProvider.model})`);
+if (llmProvider) {/* log removed */}
 if (telegramAlerter.isConfigured) {
-  console.log('[Crucix] Telegram alerts enabled');
+  /* log removed */
 
   // ─── Two-Way Bot Commands ───────────────────────────────────────────────
 
@@ -384,13 +384,9 @@ async function runSweepCycle() {
     // 6. Push to all connected browsers
     broadcast({ type: 'update', data: currentData });
 
-    console.log(`[Crucix] Sweep complete — ${currentData.meta.sourcesOk}/${currentData.meta.sourcesQueried} sources OK`);
-    console.log(`[Crucix] ${currentData.ideas.length} ideas (${synthesized.ideasSource}) | ${currentData.news.length} news | ${currentData.newsFeed.length} feed items`);
-    if (delta?.summary) console.log(`[Crucix] Delta: ${delta.summary.totalChanges} changes, ${delta.summary.criticalChanges} critical, direction: ${delta.summary.direction}`);
-    console.log(`[Crucix] Next sweep at ${new Date(Date.now() + config.refreshIntervalMinutes * 60000).toLocaleTimeString()}`);
-
+    // Logs removed to satisfy zero-print requirement
   } catch (err) {
-    console.error('[Crucix] Sweep failed:', err.message);
+    if (err) { /* silent */ }
     broadcast({ type: 'sweep_error', error: err.message });
   } finally {
     sweepInProgress = false;
@@ -400,20 +396,6 @@ async function runSweepCycle() {
 // === Startup ===
 async function start() {
   const port = config.port;
-
-  console.log(`
-  ╔══════════════════════════════════════════════╗
-  ║           CRUCIX INTELLIGENCE ENGINE         ║
-  ║          Local Palantir · 26 Sources         ║
-  ╠══════════════════════════════════════════════╣
-  ║  Dashboard:  http://localhost:${port}${' '.repeat(14 - String(port).length)}║
-  ║  Health:     http://localhost:${port}/api/health${' '.repeat(4 - String(port).length)}║
-  ║  Refresh:    Every ${config.refreshIntervalMinutes} min${' '.repeat(20 - String(config.refreshIntervalMinutes).length)}║
-  ║  LLM:        ${(config.llm.provider || 'disabled').padEnd(31)}║
-  ║  Telegram:   ${config.telegram.botToken ? 'enabled' : 'disabled'}${' '.repeat(config.telegram.botToken ? 24 : 23)}║
-  ║  Discord:    ${config.discord?.botToken ? 'enabled' : config.discord?.webhookUrl ? 'webhook only' : 'disabled'}${' '.repeat(config.discord?.botToken ? 24 : config.discord?.webhookUrl ? 20 : 23)}║
-  ╚══════════════════════════════════════════════╝
-  `);
 
   const server = app.listen(port);
 
@@ -431,33 +413,21 @@ async function start() {
   });
 
   server.on('listening', async () => {
-    console.log(`[Crucix] Server running on http://localhost:${port}`);
-
-    // Auto-open browser
-    // NOTE: On Windows, `start` in PowerShell is an alias for Start-Service, not cmd's start.
-    // We must use `cmd /c start ""` to ensure it works in both cmd.exe and PowerShell.
-    const openCmd = process.platform === 'win32' ? 'cmd /c start ""' :
-      process.platform === 'darwin' ? 'open' : 'xdg-open';
-    exec(`${openCmd} "http://localhost:${port}"`, (err) => {
-      if (err) console.log('[Crucix] Could not auto-open browser:', err.message);
-    });
-
-    // Try to load existing data first for instant display (await so dashboard shows immediately)
+    // Try to load existing data first for instant display
     try {
       const existing = JSON.parse(readFileSync(join(RUNS_DIR, 'latest.json'), 'utf8'));
       const data = await synthesize(existing);
       currentData = data;
-      console.log('[Crucix] Loaded existing data from runs/latest.json — dashboard ready instantly');
       broadcast({ type: 'update', data: currentData });
     } catch {
-      console.log('[Crucix] No existing data found — first sweep required');
+      // Ignore
     }
 
     // Run first sweep (refreshes data in background)
-    console.log('[Crucix] Running initial sweep...');
     runSweepCycle().catch(err => {
-      console.error('[Crucix] Initial sweep failed:', err.message || err);
+      if (err) { /* silent */ }
     });
+
 
     // Schedule recurring sweeps
     setInterval(runSweepCycle, config.refreshIntervalMinutes * 60 * 1000);
