@@ -1,0 +1,67 @@
+/*
+ * ╔══════════════════════════════════════════════════════════╗
+ * ║         GEONIX ECO — TYPOGRAPHY SYSTEM                  ║
+ * ║  Inter — display / headings / panel labels              ║
+ * ║  JetBrains Mono — numbers, timestamps, coordinates      ║
+ * ╚══════════════════════════════════════════════════════════╝
+ */
+
+/* ── FONT IMPORTS ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+:root {
+  --font-display: 'Inter', sans-serif;        /* headings, labels, panel titles */
+  --font-data:    'JetBrains Mono', monospace; /* numbers, coordinates, timestamps */
+}
+
+/* ── PANEL HEADERS ────────────────────────────────────────── */
+/* Targets: "DISASTER MONITOR", "ENV WATCH", "SIGNAL CORE", etc. */
+[class*="panel-title"],
+[class*="section-header"],
+[class*="panel-header"] h2,
+[class*="panel-header"] h3 {
+  font-family: var(--font-display) !important;
+  font-weight: 600 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: var(--gx-text-secondary) !important;
+}
+
+/* ── ALL NUMERIC DATA VALUES ──────────────────────────────── */
+/* Targets: count numbers (50,540), metric values (38.2), coordinates */
+[class*="count"],
+[class*="value"],
+[class*="metric"],
+[class*="number"],
+[class*="stat"],
+[class*="coordinate"] {
+  font-family: var(--font-data) !important;
+  color: var(--gx-text-mono) !important;
+}
+
+/* ── TIMESTAMPS & LABELS ──────────────────────────────────── */
+[class*="timestamp"],
+[class*="time-ago"],
+[class*="label"]:not([class*="map"]) {
+  font-family: var(--font-data) !important;
+  font-weight: 400 !important;
+  font-size: 10px !important;
+  color: var(--gx-text-tertiary) !important;
+  letter-spacing: 0.05em !important;
+}
+
+/* ── AI INSIGHTS / PREDICTION / ANALYSIS TEXT ────────────── */
+/* The paragraph text in AI Prediction cards — no ALL CAPS */
+[class*="insight"],
+[class*="analysis"],
+[class*="prediction-text"],
+[class*="alert-headline"] {
+  font-family: var(--font-display) !important;
+  font-weight: 400 !important;
+  font-size: 12px !important;
+  line-height: 1.65 !important;
+  color: var(--gx-text-primary) !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}

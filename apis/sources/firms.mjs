@@ -128,7 +128,7 @@ export async function briefing() {
   const signals = [];
   for (const h of hotspots) {
     if (h.highIntensity?.length > 5) {
-      signals.push(`HIGH INTENSITY FIRES in ${h.region}: ${h.highIntensity.length} detections >10MW FRP`);
+      signals.push(`Thermal Anomaly Detected in ${h.region}: ${h.highIntensity.length} detections >10MW FRP`);
     }
     if (h.nightDetections > 20) {
       signals.push(`ELEVATED NIGHT ACTIVITY in ${h.region}: ${h.nightDetections} night detections (potential strikes/combat)`);

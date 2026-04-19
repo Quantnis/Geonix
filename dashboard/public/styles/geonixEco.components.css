@@ -1,0 +1,297 @@
+/*
+ * ╔══════════════════════════════════════════════════════════╗
+ * ║        GEONIX ECO — COMPONENT OVERRIDES                 ║
+ * ║  Surgical !important overrides. Touches visual only —   ║
+ * ║  no layout, no structure, no JS/TS, no map config.      ║
+ * ╚══════════════════════════════════════════════════════════╝
+ */
+
+
+/* ──────────────────────────────────────────────────────────
+   A. GLOBAL SURFACE REFINEMENT
+   ────────────────────────────────────────────────────────── */
+
+/* Base background */
+body,
+#root,
+.dashboard-root {
+  background-color: var(--gx-bg-void) !important;
+  height: 100vh !important;
+  overflow: hidden !important;
+}
+
+/* All panels / sidebars */
+[class*="sidebar"],
+[class*="panel"]:not([class*="map"]) {
+  background-color: var(--gx-bg-panel) !important;
+  border-color: var(--gx-border) !important;
+  overflow-y: auto !important;
+}
+
+/* Grid layout adjustments to be max 12px gap */
+.grid,
+.lower {
+  gap: 12px !important;
+}
+
+/* Card surfaces */
+[class*="card"],
+[class*="widget"],
+[class*="metric-block"],
+[class*="alert-item"] {
+  background-color: var(--gx-bg-surface) !important;
+  border-color: var(--gx-border-card) !important;
+  border-radius: var(--gx-radius-md) !important;
+  padding: var(--gx-space-md) !important;
+  box-shadow: none !important;   /* remove hard shadows */
+}
+
+/* Hover states */
+[class*="card"]:hover,
+[class*="alert-item"]:hover,
+[class*="threat-item"]:hover {
+  background-color: var(--gx-bg-elevated) !important;
+  border-color: var(--gx-border-strong) !important;
+  transition: background-color 200ms ease, border-color 200ms ease !important;
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   B. SEVERITY COLOR OVERRIDES  ← MOST IMPORTANT SECTION
+   Remaps ALL severity indicators to eco palette.
+   Military-neon colours are fully replaced.
+   ────────────────────────────────────────────────────────── */
+
+/* CRITICAL — only true emergencies (>500 MW FRP, major flood stage) */
+[class*="critical"],
+[class*="severity-critical"],
+[data-severity="CRITICAL"] {
+  --severity-color: var(--gx-accent-danger) !important;
+  --severity-bg:    var(--gx-accent-danger-bg) !important;
+}
+
+/* WARNING — elevated risk, watch advisories */
+[class*="warning"]:not(button),
+[class*="severity-warning"],
+[data-severity="WARNING"] {
+  --severity-color: var(--gx-accent-warning) !important;
+  --severity-bg:    var(--gx-accent-warning-bg) !important;
+}
+
+/* MONITORING / INFO — standard watch, satellite passes */
+[class*="monitoring"],
+[class*="severity-monitoring"],
+[data-severity="MONITORING"],
+[class*="info"] {
+  --severity-color: var(--gx-accent-info) !important;
+  --severity-bg:    var(--gx-accent-info-bg) !important;
+}
+
+/* Gentle "breath" animation — replaces aggressive pulsing */
+@keyframes gentlePulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.6; }
+}
+
+/* All pulse/blink/live-dot elements → slow, calm breath */
+[class*="pulse"],
+[class*="blink"],
+[class*="live-dot"] {
+  animation: gentlePulse 3s ease-in-out infinite !important;
+  box-shadow: none !important;  /* remove expanding ring */
+}
+
+/* Critical events breath slightly faster — still not alarming */
+[data-severity="CRITICAL"] [class*="pulse"],
+[class*="critical"] [class*="pulse"] {
+  animation: gentlePulse 2s ease-in-out infinite !important;
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   C. LEFT SIDEBAR — MONITORING PANEL
+   ────────────────────────────────────────────────────────── */
+
+/* Category dots → soft, borderless circles */
+[class*="category-dot"],
+[class*="indicator-dot"],
+[class*="status-dot"] {
+  width: 7px !important;
+  height: 7px !important;
+  border-radius: 50% !important;
+  border: none !important;
+}
+
+/* Count numbers (50,540 etc.) — data mono, no neon */
+[class*="category-count"],
+[class*="item-count"] {
+  font-family: var(--font-data) !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: var(--gx-text-mono) !important;
+}
+
+/* Section dividers — barely visible */
+[class*="section-divider"],
+[class*="panel-divider"] {
+  border-color: var(--gx-border) !important;
+  opacity: 0.5 !important;
+}
+
+/* ENV WATCH table rows — generous breathing room */
+[class*="region-row"],
+[class*="monitor-row"],
+.site-row,
+.econ-row,
+.tk-card,
+.layer-item,
+.sm,
+.ic,
+.idea-card,
+.delta-row {
+  padding: 4px 6px !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  background: transparent !important;
+}
+
+/* Zebra striping */
+.site-row:nth-child(even),
+.econ-row:nth-child(even),
+.tk-card:nth-child(even),
+.layer-item:nth-child(even),
+.ic:nth-child(even),
+.idea-card:nth-child(even),
+.delta-row:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   D. RISK GAUGES → CLEAN METRIC ROWS  (Signal Core)
+   ────────────────────────────────────────────────────────── */
+
+/* Progress / gauge tracks — ultra-thin lines */
+[class*="gauge-bar"],
+[class*="progress-bar"],
+[class*="metric-bar"] {
+  height: 2px !important;
+  border-radius: 1px !important;
+  background: var(--gx-bg-elevated) !important;
+}
+
+/* Fill segments */
+[class*="gauge-fill"],
+[class*="progress-fill"],
+[class*="metric-fill"] {
+  border-radius: 1px !important;
+  transition: width 800ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   E. MAP AREA ATMOSPHERE
+   ────────────────────────────────────────────────────────── */
+
+/* Softer map container border */
+[class*="map-container"],
+[class*="map-wrapper"] {
+  border-color: var(--gx-border) !important;
+}
+
+/* Map legend row — frosted glass on earth tones */
+[class*="map-legend"],
+[class*="legend-row"] {
+  background: rgba(16, 21, 18, 0.75) !important;
+  backdrop-filter: blur(8px) !important;
+  border-top: 1px solid var(--gx-border) !important;
+  padding: 10px 16px !important;
+}
+
+/* Legend dot labels */
+[class*="legend-label"] {
+  font-family: var(--font-display) !important;
+  font-size: 10px !important;
+  color: var(--gx-text-secondary) !important;
+  letter-spacing: 0.06em !important;
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   F. ALERT FEED CARDS
+   ────────────────────────────────────────────────────────── */
+
+/* Individual alert cards — thin coloured left border, no box-shadow */
+[class*="alert-card"],
+[class*="alert-item"] {
+  border-left-width: 2px !important;
+  border-left-style: solid !important;
+  border-left-color: var(--severity-color, var(--gx-border-strong)) !important;
+  border-top: none !important;
+  border-right: none !important;
+  border-bottom: 1px solid var(--gx-border) !important;
+  border-radius: 0 var(--gx-radius-sm) var(--gx-radius-sm) 0 !important;
+  box-shadow: none !important;
+  margin-bottom: var(--gx-space-sm) !important;
+}
+
+/* Source badge (FIRMS, NOAA etc.) */
+[class*="source-badge"],
+[class*="alert-source"] {
+  background: var(--gx-bg-elevated) !important;
+  border: 1px solid var(--gx-border-strong) !important;
+  border-radius: var(--gx-radius-sm) !important;
+  font-family: var(--font-data) !important;
+  font-size: 9px !important;
+  color: var(--gx-text-secondary) !important;
+}
+
+/* Severity pill (CRITICAL / WARNING / MONITORING) */
+[class*="severity-pill"],
+[class*="alert-severity"] {
+  border-radius: var(--gx-radius-sm) !important;
+  font-family: var(--font-data) !important;
+  font-size: 9px !important;
+  font-weight: 500 !important;
+  padding: 2px 6px !important;
+  background: var(--severity-bg) !important;
+  color: var(--severity-color) !important;
+  border: 1px solid var(--severity-color) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   G. TOPBAR REFINEMENT
+   ────────────────────────────────────────────────────────── */
+
+/* Main topbar — frosted earth */
+[class*="topbar"],
+[class*="header-bar"] {
+  background: rgba(16, 21, 18, 0.96) !important;
+  backdrop-filter: blur(10px) !important;
+  border-bottom: 1px solid var(--gx-border) !important;
+  box-shadow: none !important;
+}
+
+/* Brand name GEONIX */
+[class*="brand-name"],
+[class*="logo-text"] {
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  letter-spacing: 0.12em !important;
+  color: var(--gx-accent-primary) !important;
+}
+
+/* Status pills */
+[class*="status-pill"],
+[class*="system-status"] {
+  border-radius: var(--gx-radius-sm) !important;
+  font-family: var(--font-data) !important;
+  font-size: 10px !important;
+  border: 1px solid var(--severity-color, var(--gx-border-strong)) !important;
+  background: transparent !important;
+  padding: 3px 8px !important;
+}

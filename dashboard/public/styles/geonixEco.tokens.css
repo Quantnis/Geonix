@@ -1,0 +1,78 @@
+/*
+ * ╔══════════════════════════════════════════════════════════╗
+ * ║          GEONIX ECO — DESIGN TOKEN LAYER                 ║
+ * ║  Replaces the military/neon palette with organic earth   ║
+ * ║  tones befitting a premium ecological science instrument ║
+ * ╚══════════════════════════════════════════════════════════╝
+ *
+ * GEONIX ECO COLOR DOCTRINE:
+ *
+ *   --gx-accent-danger   → ONLY fires with >500 MW FRP OR floods above MAJOR flood stage
+ *   --gx-accent-warning  → Elevated risk, watch advisories, active monitoring
+ *   --gx-accent-safe     → All-clear, recovery, healthy ecosystem metrics
+ *   --gx-accent-primary  → UI chrome, active states, live indicators
+ *   --gx-accent-info     → Historical data, satellite passes, informational
+ *
+ *   NEVER use danger color for "monitoring" or routine detection events.
+ *   This is the single biggest change from the military aesthetic.
+ */
+
+:root {
+
+  /* ── BACKGROUNDS ──────────────────────────────────────────── */
+  --gx-bg-void:     #000000;          /* deep black */
+  --gx-bg-panel:    #0A0A0A;          /* solid dark */
+  --gx-bg-surface:  #111111;          /* cards */
+  --gx-bg-elevated: #1A1A1A;          /* hover states */
+  --gx-bg-overlay:  rgba(0, 0, 0, 0.92);
+
+  /* ── PRIMARY ACCENT (replaces neon #00E5C8) ───────────────── */
+  --gx-accent-primary:   #78A389;     /* sage green — calm, scientific */
+  --gx-accent-primary-l: #91B8A0;     /* lighter for hover */
+  --gx-accent-primary-d: #5B846A;     /* darker for active */
+  --gx-accent-glow:      rgba(120, 163, 137, 0.15); /* soft glow, not neon */
+
+  /* ── DANGER (replaces neon #FF3D3D) ──────────────────────── */
+  /* RULE: Use ONLY for actual life-threatening events. Not for "monitoring." */
+  --gx-accent-danger:    #C76E5A;     /* terracotta — organic, not alarm */
+  --gx-accent-danger-l:  #D68A78;
+  --gx-accent-danger-bg: rgba(199, 110, 90, 0.12);
+
+  /* ── WARNING (replaces #F5A623) ──────────────────────────── */
+  --gx-accent-warning:    #D6A055;    /* ochre — warm earth tone */
+  --gx-accent-warning-l:  #E0B572;
+  --gx-accent-warning-bg: rgba(214, 160, 85, 0.12);
+
+  /* ── SAFE / SUCCESS ──────────────────────────────────────── */
+  --gx-accent-safe:    #5A8F72;       /* forest green */
+  --gx-accent-safe-bg: rgba(90, 143, 114, 0.12);
+
+  /* ── INFORMATIONAL ───────────────────────────────────────── */
+  --gx-accent-info:    #1D4ED8;       /* deep water blue */
+  --gx-accent-info-bg: rgba(29, 78, 216, 0.12);
+
+  /* ── TEXT ────────────────────────────────────────────────── */
+  --gx-text-primary:   #F3F4F6;       /* clean white/grey */
+  --gx-text-secondary: #9CA3AF;       /* muted grey */
+  --gx-text-tertiary:  #6B7280;       /* very muted */
+  --gx-text-mono:      #9CA3AF;       /* data values */
+
+  /* ── BORDERS ─────────────────────────────────────────────── */
+  --gx-border:       rgba(77, 124, 107, 0.15);   /* very subtle sage */
+  --gx-border-strong: rgba(77, 124, 107, 0.30);
+  --gx-border-card:  rgba(212, 217, 208, 0.07);  /* near-invisible structural */
+
+  /* ── SPACING — generous breathing room ───────────────────── */
+  --gx-space-xs:  6px;
+  --gx-space-sm:  10px;
+  --gx-space-md:  16px;
+  --gx-space-lg:  24px;
+  --gx-space-xl:  36px;
+
+  /* ── RADII — organic curves ──────────────────────────────── */
+  --gx-radius-sm:  6px;
+  --gx-radius-md:  10px;
+  --gx-radius-lg:  14px;
+  --gx-radius-xl:  20px;
+
+}
