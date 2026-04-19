@@ -39,7 +39,7 @@ try {
 
 // Step 4: Check each local module
 const modules = [
-  ['./Geonix.config.mjs', 'config'],
+  ['./geonix.config.mjs', 'config'],
   ['./apis/utils/env.mjs', 'env loader'],
   ['./lib/delta/engine.mjs', 'delta engine'],
   ['./lib/delta/memory.mjs', 'memory manager'],
